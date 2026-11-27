@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Utopie — mockup</title>
+  <meta name="description" content="Verspil geen tijd meer om te zien dat je geld verspilt. Een Wierikx-Van Keulen productie.">
+  <meta name="theme-color" content="#93C47D">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%2393C47D'/%3E%3Crect x='120' y='250' width='64' height='142' rx='18' fill='%23fff'/%3E%3Crect x='224' y='170' width='64' height='222' rx='18' fill='%23fff'/%3E%3Crect x='328' y='120' width='64' height='272' rx='18' fill='none' stroke='%23fff' stroke-width='14' stroke-dasharray='22 16'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Huisstijl van Tómbola (en de app voor het huis): Montserrat, het groen #93C47D, wit papier en dunne grijze lijnen. */
+:root {
+  --ink: #000; --ink-2: #434343; --ink-3: #7a7a7a;
+  --bg: #fff; --surface: #fff; --surface-2: #eef6ea; --line: #d4d4d4;
+  --green: #93c47d; --green-deep: #38761d; --on-green: #000;
+  --out: #434343; --warn: #cc0000; --stage: #274e13;
+  --r-s: 10px; --r-m: 14px; --r-l: 20px;
+  --font: 'Montserrat', 'Segoe UI', Roboto, Arial, sans-serif;
+  --nav-h: 64px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f4f4f4; --ink-2: #c8c8c8; --ink-3: #9a9e97;
+    --bg: #1d1f1c; --surface: #1d1f1c; --surface-2: #2a3326; --line: #454a42;
+    --green-deep: #b6d7a8; --out: #9a9e97; --warn: #ff8a80; --stage: #17260f;
+    color-scheme: dark;
+  }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.45 var(--font); -webkit-font-smoothing: antialiased; min-height: 100dvh; }
+h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: 2.25rem; font-weight: 700; color: var(--green); line-height: 1.1; }
+h2 { font-size: 1.3rem; font-weight: 400; color: var(--green-deep); }
+h3 { font-size: 1rem; font-weight: 700; color: var(--ink-2); }
+p { margin: 0; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--green-deep); outline-offset: 2px; border-radius: 6px; }
+[hidden] { display: none !important; }
+.muted { color: var(--ink-2); } .small { font-size: .875rem; } .tiny { font-size: .78rem; }
+.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stack { display: grid; gap: 12px; } .stack-l { display: grid; gap: 24px; }
+.row { display: flex; align-items: center; gap: 10px; } .row-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.grow { flex: 1; min-width: 0; }
+.icon { width: 22px; height: 22px; flex: none; } .icon-s { width: 18px; height: 18px; flex: none; }
+.pos { color: var(--green-deep); font-weight: 700; } .neg { color: var(--ink); font-weight: 700; } .red { color: var(--warn); font-weight: 700; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 18px; border: 1.5px solid var(--green-deep); border-radius: 999px; background: transparent; color: var(--green-deep); font-weight: 700; font-size: .95rem; white-space: nowrap; text-decoration: none; transition: transform .08s ease, background .15s ease; }
+.btn:active { transform: translateY(1px); }
+.btn-ink { background: var(--green); color: var(--on-green); border-color: var(--green); }
+.btn-quiet { border-color: var(--line); color: var(--ink-2); font-weight: 400; }
+.btn-quiet:hover { background: var(--surface-2); color: var(--ink); }
+.btn-s { min-height: 38px; padding: 0 14px; font-size: .9375rem; }
+.btn-block { width: 100%; }
+.btn-big { min-height: 58px; padding: 0 30px; font-size: 1.1rem; }
+.iconbtn { width: 42px; height: 42px; display: inline-grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--ink-2); }
+.iconbtn:hover { background: var(--surface-2); color: var(--ink); }
+.linkbtn { border: 0; background: none; padding: 6px 2px; color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+/* forms */
+.field { display: grid; gap: 6px; }
+.field > label, .label { font-size: .9rem; color: var(--ink-2); }
+.input, .select { width: 100%; min-height: 48px; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line); border-radius: var(--r-s); }
+.select-s { min-height: 40px; padding: 6px 10px; font-size: .9rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; font-size: .9rem; }
+.chip[aria-pressed='true'] { background: var(--green); color: var(--on-green); border-color: var(--green); font-weight: 700; }
+.chip .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: 0; background: var(--c, var(--green)); }
+.seg { display: inline-flex; padding: 3px; border: 1.5px solid var(--line); border-radius: 999px; gap: 2px; }
+.seg button { border: 0; background: none; padding: 6px 14px; border-radius: 999px; font-size: .9rem; color: var(--ink-2); }
+.seg button[aria-pressed='true'] { background: var(--green); color: var(--on-green); font-weight: 700; }
+.switch { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+.switch input { position: absolute; opacity: 0; pointer-events: none; }
+.switch .track { flex: none; width: 50px; height: 30px; border-radius: 999px; background: var(--line); position: relative; transition: background .15s; margin-top: 1px; }
+.switch .track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--bg); transition: transform .15s; }
+.switch input:checked + .track { background: var(--green); }
+.switch input:checked + .track::after { transform: translateX(20px); }
+.switch b { display: block; font-weight: 700; color: var(--ink-2); }
+
+/* shell */
+.shell { min-height: 100dvh; display: grid; grid-template-rows: auto 1fr; }
+.topbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 8px; padding: 10px 14px; padding-top: calc(10px + env(safe-area-inset-top)); background: var(--bg); }
+.wordmark { font: 700 1.3rem/1 var(--font); color: var(--green); letter-spacing: -0.01em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 0; background: none; padding: 0; }
+.wordmark svg { width: 30px; height: 30px; }
+.avatar { width: 34px; height: 34px; border-radius: 50%; display: inline-grid; place-items: center; background: var(--green-deep); color: var(--bg); font: 700 .9rem/1 var(--font); }
+.main { width: 100%; max-width: 760px; margin: 0 auto; padding: 8px 20px calc(var(--nav-h) + 36px + env(safe-area-inset-bottom)); }
+.tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; display: grid; grid-template-columns: repeat(5, 1fr); background: var(--surface); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom); }
+.tab { height: var(--nav-h); display: grid; place-content: center; justify-items: center; gap: 3px; border: 0; background: none; color: var(--ink-2); font-size: .72rem; }
+.tab[aria-current='page'] { color: var(--green-deep); font-weight: 700; }
+.side { display: contents; }
+.side-foot { display: none; }
+@media (min-width: 900px) {
+  .shell { grid-template-columns: 250px 1fr; grid-template-rows: 1fr; }
+  .side { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 0; height: 100dvh; padding: 26px 18px; background: var(--surface); border-right: 1px solid var(--line); }
+  .topbar { position: static; padding: 0; background: none; }
+  .topbar .grow, .topbar .avatar { display: none; }
+  .tabs { position: static; grid-template-columns: 1fr; gap: 4px; border: 0; background: none; padding: 0; }
+  .tab { height: 46px; grid-auto-flow: column; justify-content: start; align-items: center; gap: 12px; padding: 0 12px; border-radius: 12px; font-size: 1rem; }
+  .tab[aria-current='page'] { background: var(--surface-2); }
+  .side-foot { display: grid; gap: 10px; margin-top: auto; }
+  .main { padding: 40px 36px 64px; }
+}
+
+/* cards */
+.card { border: 1.5px solid var(--line); border-radius: var(--r-m); padding: 18px; }
+.card-green { background: var(--surface-2); border-color: var(--green); }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 30px 0 12px; }
+.page-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; margin: 4px 0 18px; }
+.banner { background: var(--surface-2); border-left: 4px solid var(--green); border-radius: 4px; padding: 10px 14px; font-size: .9rem; }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; border: 1.5px solid var(--line); font-size: .76rem; color: var(--ink-2); white-space: nowrap; }
+.pill-ok { background: var(--surface-2); border-color: var(--green); color: var(--green-deep); font-weight: 700; }
+.pill-open { background: var(--green); border-color: var(--green); color: var(--on-green); font-weight: 700; }
+.pill-dash { border-style: dashed; }
+.kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.kpi { border: 1.5px solid var(--line); border-radius: var(--r-m); padding: 12px 14px; display: grid; gap: 2px; min-width: 0; }
+.kpi .label { font-size: .78rem; }
+.kpi b { font-size: 1.25rem; font-variant-numeric: tabular-nums; }
+.kpi.k-in b { color: var(--green-deep); }
+.kpi.k-wait { border-style: dashed; border-color: var(--green); }
+@media (max-width: 420px) { .kpi b { font-size: 1.05rem; } .kpi { padding: 10px; } }
+
+/* chart */
+.chart { display: grid; grid-template-columns: 34px 1fr; gap: 8px; }
+.yaxis { display: grid; align-content: space-between; height: 200px; font-size: .7rem; color: var(--ink-3); text-align: right; padding-bottom: 0; }
+.plot { position: relative; height: 200px; display: grid; grid-template-columns: repeat(7, 1fr); align-items: end; gap: 6px; background: repeating-linear-gradient(to top, var(--line) 0 1px, transparent 1px 50px); border-bottom: 1.5px solid var(--ink-3); }
+.day { height: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 3px; }
+.bar { width: min(18px, 40%); height: 100%; display: flex; flex-direction: column-reverse; }
+.bar i { display: block; width: 100%; flex: none; }
+.bar i:last-child { border-radius: 6px 6px 0 0; }
+.b-in { background: var(--green); }
+.b-wait { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--green) 35%, transparent) 0 4px, transparent 4px 8px); outline: 1.5px dashed var(--green); outline-offset: -1.5px; }
+.b-out { background: var(--out); }
+.b-spread { background: color-mix(in srgb, var(--out) 45%, transparent); }
+.xaxis { grid-column: 2; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; font-size: .75rem; color: var(--ink-2); text-align: center; }
+.xaxis .today { color: var(--green-deep); font-weight: 700; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; color: var(--ink-2); font-size: .82rem; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+/* lists */
+.list { display: grid; }
+.li { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+.li + .li { border-top: 1px solid var(--line); }
+.li .ico { width: 40px; height: 40px; border-radius: 12px; background: var(--surface-2); display: grid; place-items: center; flex: none; font-size: 1.15rem; }
+.li .t { font-weight: 700; color: var(--ink); } .li .m { font-size: .8rem; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; margin-top: 2px; }
+.li .amt { text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+.li .amt small { display: block; font-weight: 400; font-size: .75rem; color: var(--ink-3); }
+.daylabel { font-size: .8rem; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: .06em; margin: 22px 0 2px; }
+.linked { border-left: 3px solid var(--green); padding-left: 10px; margin-left: 4px; }
+
+/* tickets (from Tómbola) for invoices */
+.tk { --c: var(--green); --ci: #000; --stub: 64px; --notch: 8px; display: block; width: 100%; filter: drop-shadow(0 0 .6px var(--ink-3)) drop-shadow(0 0 .6px var(--ink-3)); }
+.tk-in { display: grid; grid-template-columns: var(--stub) 1fr; min-height: 84px; background: var(--surface); border-radius: 14px; overflow: hidden;
+  -webkit-mask: radial-gradient(circle var(--notch) at var(--stub) 0, #0000 97%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at var(--stub) 100%, #0000 97%, #000) bottom / 100% 51% no-repeat;
+  mask: radial-gradient(circle var(--notch) at var(--stub) 0, #0000 97%, #000) top / 100% 51% no-repeat, radial-gradient(circle var(--notch) at var(--stub) 100%, #0000 97%, #000) bottom / 100% 51% no-repeat; }
+.tk-stub { background: var(--c); color: var(--ci); display: grid; place-content: center; justify-items: center; gap: 2px; border-right: 2px dashed color-mix(in srgb, var(--ci) 45%, transparent); line-height: 1; }
+.tk-stub small { font-size: .62rem; opacity: .8; text-transform: uppercase; letter-spacing: .05em; }
+.tk-stub b { font-size: 1.2rem; }
+.tk-body { padding: 12px 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; min-width: 0; }
+.tk-title { font-weight: 700; } .tk-meta { font-size: .8rem; color: var(--ink-2); }
+.tk-wait { --c: transparent; }
+.tk-wait .tk-stub { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--green) 30%, transparent) 0 6px, transparent 6px 12px); color: var(--green-deep); border-right-color: var(--green); }
+.checks { display: flex; gap: 8px; margin-left: auto; }
+.check { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px 0 8px; border-radius: 999px; border: 1.5px solid var(--line); background: none; font-size: .82rem; color: var(--ink-2); }
+.check .box { width: 20px; height: 20px; border-radius: 6px; border: 2px solid var(--ink-3); display: grid; place-items: center; }
+.check[aria-pressed='true'] { border-color: var(--green); background: var(--surface-2); color: var(--green-deep); font-weight: 700; }
+.check[aria-pressed='true'] .box { background: var(--green-deep); border-color: var(--green-deep); color: var(--bg); }
+.check[aria-pressed='true'] .box::after { content: '✓'; font-size: .8rem; line-height: 1; }
+
+/* meters */
+.meter { height: 14px; border-radius: 999px; background: var(--surface-2); overflow: hidden; display: flex; }
+.meter i { display: block; height: 100%; }
+.split { display: flex; height: 44px; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--line); }
+.split > div { display: grid; place-items: center; font-size: .75rem; font-weight: 700; padding: 0 4px; white-space: nowrap; overflow: hidden; }
+.acc { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 14px 0; }
+.acc + .acc { border-top: 1px solid var(--line); }
+.big-pct { font-size: 3.4rem; font-weight: 700; color: var(--green); line-height: 1; letter-spacing: -0.03em; }
+
+/* songs */
+.song { display: grid; gap: 8px; padding: 14px 0; }
+.song + .song { border-top: 1px solid var(--line); }
+.shares { display: flex; height: 10px; border-radius: 999px; overflow: hidden; gap: 2px; }
+.shares i { display: block; height: 100%; }
+.stock { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stock .card { padding: 14px; display: grid; gap: 4px; text-align: center; }
+.stock .card b { font-size: 1.6rem; color: var(--green-deep); }
+
+/* landing */
+.landing { min-height: 100dvh; display: grid; align-content: center; justify-items: center; gap: 26px; padding: 40px 22px; text-align: center; }
+.presents { font-size: .78rem; letter-spacing: .32em; text-transform: uppercase; color: var(--ink-2); }
+.presents b { color: var(--ink); letter-spacing: .32em; }
+.landing h1 { font-size: clamp(3rem, 14vw, 5rem); letter-spacing: -0.03em; }
+.landing .lead { font: 700 clamp(1.2rem, 4.6vw, 1.6rem)/1.3 var(--font); color: var(--green-deep); max-width: 22ch; margin-inline: auto; }
+.landing .sub { color: var(--ink-2); max-width: 34ch; }
+.hero-bars { display: flex; align-items: flex-end; gap: 12px; height: 120px; }
+.hero-bars i { width: 34px; border-radius: 10px 10px 4px 4px; background: var(--green); animation: grow .9s cubic-bezier(.2,.8,.2,1) both; }
+.hero-bars i:nth-child(2) { animation-delay: .08s } .hero-bars i:nth-child(3) { animation-delay: .16s } .hero-bars i:nth-child(4) { animation-delay: .24s } .hero-bars i:nth-child(5) { animation-delay: .32s }
+.hero-bars i.w { background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--green) 35%, transparent) 0 6px, transparent 6px 12px); outline: 2px dashed var(--green); outline-offset: -2px; }
+@keyframes grow { from { transform: scaleY(0); transform-origin: bottom; } }
+.credit { border-top: 1.5px solid var(--line); padding-top: 18px; max-width: 30rem; font-size: .9rem; color: var(--ink-2); }
+.credit b { color: var(--ink); }
+.google { border-color: var(--line); color: var(--ink); min-height: 54px; padding: 0 22px; }
+.demo-tag { position: fixed; top: calc(16px + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); z-index: 50; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--ink-2); color: var(--bg); padding: 4px 10px; border-radius: 999px; pointer-events: none; }
+@media (min-width: 900px) { .demo-tag { top: 14px; left: auto; right: 18px; transform: none; } }
+
+/* sheets */
+.scrim { position: fixed; inset: 0; z-index: 20; background: rgba(0,0,0,.45); display: grid; align-items: end; animation: fade .15s ease; }
+.sheet { width: 100%; max-height: 92dvh; overflow: auto; overscroll-behavior: contain; background: var(--bg); border-radius: var(--r-l) var(--r-l) 0 0; padding: 8px 18px calc(22px + env(safe-area-inset-bottom)); animation: rise .22s cubic-bezier(.2,.8,.2,1); }
+.sheet-head { position: sticky; top: -8px; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 0 10px; background: var(--bg); }
+.sheet-head h2 { font-size: 1.5rem; font-weight: 700; color: var(--green); }
+.sheet-foot { display: flex; gap: 10px; margin-top: 22px; }
+.sheet-foot .btn { flex: 1; }
+@media (min-width: 640px) { .scrim { align-items: center; justify-items: center; padding: 24px; } .sheet { max-width: 560px; border-radius: var(--r-l); } .sheet.wide { max-width: 720px; } }
+@keyframes fade { from { opacity: 0; } } @keyframes rise { from { transform: translateY(24px); opacity: 0; } }
+.steps { display: flex; gap: 6px; font-size: .78rem; color: var(--ink-3); }
+.steps span { flex: 1; border-top: 4px solid var(--line); padding-top: 6px; }
+.steps span.on { border-color: var(--green); color: var(--green-deep); font-weight: 700; }
+.map { display: grid; gap: 8px; }
+.map-row { display: grid; grid-template-columns: 1fr 22px 1fr; gap: 8px; align-items: center; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: var(--r-s); }
+.map-row .src b { display: block; font-size: .9rem; } .map-row .src span { font-size: .75rem; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+.map-row.guess { border-color: var(--green); background: var(--surface-2); }
+.preview { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.preview th, .preview td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.preview th { color: var(--green-deep); }
+.total { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 16px; border-radius: var(--r-m); background: var(--surface-2); border: 1.5px solid var(--green); }
+.total b { font-size: 1.6rem; color: var(--green-deep); }
+.about { max-width: 36rem; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+</style>
+</head>
+<body>
+<div class="demo-tag">Mockup</div>
+
+<!-- ============ LANDING ============ -->
+<section class="landing" id="landing">
+  <p class="presents"><b>Wierikx-Van Keulen</b><br>presenteert</p>
+  <div class="hero-bars" aria-hidden="true"><i style="height:45%"></i><i style="height:70%"></i><i style="height:55%"></i><i style="height:92%"></i><i class="w" style="height:78%"></i></div>
+  <h1>Utopie</h1>
+  <p class="lead">Verspil geen tijd meer om te zien dat je geld verspilt.</p>
+  <p class="sub">Huishoudboekje, ZZP-administratie en muziekboekhouding in één. Zodat je meer van het leven geniet en minder tijd verspilt aan administratie.</p>
+  <div class="stack" style="justify-items:center">
+    <button class="btn google" data-enter>
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.2-2.1 3.5-5.1 3.5-8.8z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9h-4v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.4 14.4a7.2 7.2 0 0 1 0-4.7V6.6h-4a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.4 6.6l4 3.1C6.3 6.9 8.9 4.8 12 4.8z"/></svg>
+      Inloggen met Google
+    </button>
+    <button class="linkbtn" data-enter>Bekijk de mockup zonder inloggen</button>
+  </div>
+  <p class="credit">Een <b>Wierikx-Van Keulen productie</b>: gemaakt om meer van het leven te genieten en minder te verspillen aan administratie.</p>
+</section>
+
+<!-- ============ APP ============ -->
+<div class="shell" id="app" hidden>
+  <aside class="side">
+    <header class="topbar">
+      <button class="wordmark" data-view="overzicht" aria-label="Utopie">
+        <svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="112" fill="#93C47D"/><rect x="120" y="250" width="64" height="142" rx="18" fill="#fff"/><rect x="224" y="170" width="64" height="222" rx="18" fill="#fff"/><rect x="328" y="120" width="64" height="272" rx="18" fill="none" stroke="#fff" stroke-width="14" stroke-dasharray="22 16"/></svg>
+        <span>Utopie</span>
+      </button>
+      <span class="grow"></span>
+      <button class="iconbtn" data-view="over" aria-label="Over Utopie"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg></button>
+      <span class="avatar">N</span>
+    </header>
+    <nav class="tabs" aria-label="Menu">
+      <button class="tab" data-view="overzicht" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 20V11M12 20V5M19 20v-6"/></svg>Overzicht</button>
+      <button class="tab" data-view="transacties"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>Transacties</button>
+      <button class="tab" data-view="facturen"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="m9 13 2 2 4-4"/></svg>Facturen</button>
+      <button class="tab" data-view="muziek"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>Muziek</button>
+      <button class="tab" data-view="potjes"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M16 13.5h.01M3 10h18M7 7V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/></svg>Potjes</button>
+    </nav>
+    <div class="side-foot">
+      <button class="btn btn-ink btn-block" data-sheet="transactie">+ Transactie</button>
+      <button class="btn btn-block" data-sheet="werkdag">+ Werkdag</button>
+      <p class="tiny muted" style="margin-top:10px">Een <b>Wierikx-Van Keulen</b> productie</p>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERZICHT -->
+    <section data-page="overzicht">
+      <div class="page-head">
+        <div><p class="muted small">Week 48 · 23 – 29 november</p><h1>Hoi Naduah</h1></div>
+        <div class="seg" role="group" aria-label="Periode"><button aria-pressed="true">Week</button><button>Maand</button><button>Jaar</button></div>
+      </div>
+
+      <div class="row-wrap" style="margin-bottom:18px">
+        <button class="btn btn-ink" data-sheet="transactie">+ Transactie</button>
+        <button class="btn" data-sheet="werkdag">+ Werkdag</button>
+        <button class="btn btn-quiet" data-sheet="import"><svg class="icon-s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>Bank-CSV</button>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi k-in"><span class="label">Binnen</span><b>€ 642</b></div>
+        <div class="kpi"><span class="label">Uitgegeven</span><b>€ 318</b></div>
+        <div class="kpi k-wait"><span class="label">Nog te ontvangen</span><b>€ 365</b></div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="chart">
+          <div class="yaxis"><span>€ 300</span><span>€ 200</span><span>€ 100</span><span>0</span></div>
+          <div class="plot" aria-label="Staafdiagram inkomsten en uitgaven per dag">
+            <div class="day"><div class="bar"><i class="b-in" style="height:38%"></i></div><div class="bar"><i class="b-spread" style="height:11%"></i><i class="b-out" style="height:14%"></i></div></div>
+            <div class="day"><div class="bar"><i class="b-in" style="height:12%"></i><i class="b-wait" style="height:48%"></i></div><div class="bar"><i class="b-spread" style="height:11%"></i><i class="b-out" style="height:8%"></i></div></div>
+            <div class="day"><div class="bar"><i class="b-in" style="height:70%"></i></div><div class="bar"><i class="b-spread" style="height:11%"></i><i class="b-out" style="height:30%"></i></div></div>
+            <div class="day"><div class="bar"><i class="b-in" style="height:9%"></i><i class="b-wait" style="height:52%"></i></div><div class="bar"><i class="b-spread" style="height:11%"></i><i class="b-out" style="height:20%"></i></div></div>
+            <div class="day"><div class="bar"><i class="b-in" style="height:84%"></i></div><div class="bar"><i class="b-spread" style="height:11%"></i><i class="b-out" style="height:42%"></i></div></div>
+            <div class="day"><div class="bar"><i class="b-in" style="height:15%"></i><i class="b-wait" style="height:22%"></i></div><div class="bar"><i class="b-spread" style="height:11%"></i><i class="b-out" style="height:18%"></i></div></div>
+            <div class="day"><div class="bar"></div><div class="bar"><i class="b-spread" style="height:11%"></i></div></div>
+          </div>
+          <div class="xaxis"><span>ma</span><span>di</span><span>wo</span><span>do</span><span class="today">vr</span><span>za</span><span>zo</span></div>
+        </div>
+        <div class="legend" style="margin-top:14px">
+          <span><i class="b-in"></i>Inkomsten</span>
+          <span><i class="b-wait"></i>Nog niet uitbetaald</span>
+          <span><i class="b-out"></i>Uitgaven</span>
+          <span><i class="b-spread"></i>Gespreid (huur)</span>
+        </div>
+      </div>
+
+      <div class="section-head"><h3>Categorieën</h3><span class="tiny muted">Tik om aan of uit te zetten</span></div>
+      <div class="chips">
+        <button class="chip" aria-pressed="true">Werk</button>
+        <button class="chip" aria-pressed="true">Fooien</button>
+        <button class="chip" aria-pressed="true">Wonen</button>
+        <button class="chip" aria-pressed="true">Boodschappen</button>
+        <button class="chip" aria-pressed="false">Uit eten</button>
+        <button class="chip" aria-pressed="true">Reizen</button>
+        <button class="chip" aria-pressed="false">Muziek</button>
+      </div>
+
+      <div class="section-head"><h3>Vergelijk</h3><button class="linkbtn">Andere periode</button></div>
+      <div class="card stack">
+        <div class="row"><span class="grow">Deze week</span><span class="num pos">+ € 324</span></div>
+        <div class="meter"><i style="width:64%;background:var(--green)"></i></div>
+        <div class="row"><span class="grow muted">Week 47</span><span class="num">+ € 211</span></div>
+        <div class="meter"><i style="width:42%;background:var(--ink-3)"></i></div>
+      </div>
+    </section>
+
+    <!-- TRANSACTIES -->
+    <section data-page="transacties" hidden>
+      <div class="page-head">
+        <div><p class="muted small">Alle bedragen op hun echte datum</p><h1>Transacties</h1></div>
+        <button class="btn btn-quiet btn-s" data-sheet="import">Bank-CSV importeren</button>
+      </div>
+      <div class="chips"><button class="chip" aria-pressed="true">Alles</button><button class="chip" aria-pressed="false">Privé</button><button class="chip" aria-pressed="false">ZZP</button><button class="chip" aria-pressed="false">Muziek</button><button class="chip" aria-pressed="false">Contant</button></div>
+
+      <p class="daylabel">Vandaag · vr 27 nov</p>
+      <div class="list">
+        <div class="li"><div class="ico">☕</div><div class="grow"><div class="t">Café De Zon</div><div class="m"><span class="pill">ZZP</span><span>Werkdag · 7 uur</span><span class="pill pill-dash">Nog niet betaald</span></div></div><div class="amt pos">+ € 154,00<small>incl. € 18 fooi</small></div></div>
+        <div class="li"><div class="ico">🛒</div><div class="grow"><div class="t">Albert Heijn</div><div class="m"><span class="pill">Privé</span><span>Boodschappen</span></div></div><div class="amt">− € 23,41</div></div>
+      </div>
+
+      <p class="daylabel">Do 26 nov</p>
+      <div class="list">
+        <div class="li linked"><div class="ico">🍝</div><div class="grow"><div class="t">Trattoria Nonna</div><div class="m"><span class="pill">Privé</span><span>Uit eten</span><span class="pill pill-ok">Gekoppeld · telt € 55</span></div></div><div class="amt">− € 80,00</div></div>
+        <div class="li linked"><div class="ico">↩︎</div><div class="grow"><div class="t">Tikkie van Sam</div><div class="m"><span>Terug voor uit eten</span></div></div><div class="amt pos">+ € 25,00</div></div>
+        <div class="li"><div class="ico">🔁</div><div class="grow"><div class="t">Salaris naar privé</div><div class="m"><span class="pill">ZZP → Privé</span><span>Overboeking</span></div></div><div class="amt muted">€ 1.200,00</div></div>
+      </div>
+
+      <p class="daylabel">Ma 23 nov</p>
+      <div class="list">
+        <div class="li"><div class="ico">🏡</div><div class="grow"><div class="t">Huur november</div><div class="m"><span class="pill">Privé</span><span>Wonen</span><span class="pill">Gespreid over 30 dagen</span></div></div><div class="amt">− € 650,00<small>€ 21,67 per dag</small></div></div>
+        <div class="li"><div class="ico">🎛️</div><div class="grow"><div class="t">Microfoonkabels</div><div class="m"><span class="pill">Muziek</span><span>Apparatuur</span><span>21% btw</span></div></div><div class="amt">− € 36,30<small>€ 30,00 excl. btw</small></div></div>
+      </div>
+
+      <div class="section-head"><h3>Op reis</h3></div>
+      <div class="card stack">
+        <div class="row"><span class="ico" style="width:40px;height:40px;border-radius:12px;background:var(--surface-2);display:grid;place-items:center">🇲🇦</span><div class="grow"><b>Persoonlijke koers dirham</b><p class="small muted">Gemiddelde van 3 keer wisselen</p></div><span class="num pos">€ 1 = 10,82 MAD</span></div>
+        <div class="li" style="padding-bottom:0"><div class="grow"><div class="t">Hostel Riad Atlas</div><div class="m"><span class="pill">Reizen</span><span>Gespreid over 4 nachten</span></div></div><div class="amt">− 960 MAD<small>≈ € 88,72</small></div></div>
+      </div>
+    </section>
+
+    <!-- FACTUREN -->
+    <section data-page="facturen" hidden>
+      <div class="page-head">
+        <div><p class="muted small">Vink af wat verstuurd en betaald is</p><h1>Facturen</h1></div>
+      </div>
+      <div class="banner">Zodra je <b>Betaald</b> aanvinkt, komt het bedrag bij je transacties en wordt de staaf in het overzicht vol.</div>
+
+      <div class="section-head"><h3>Nog te doen</h3><span class="num small muted">€ 1.493</span></div>
+      <div class="stack">
+        <div class="tk tk-wait"><div class="tk-in"><div class="tk-stub"><small>nov</small><b>12</b><small>dagen</small></div><div class="tk-body"><div class="grow"><div class="tk-title">Café De Zon</div><div class="tk-meta">Maandfactuur · 84 uur × € 16,50</div></div><b class="num">€ 1.386,00</b><div class="checks"><button class="check" aria-pressed="false"><span class="box"></span>Verstuurd</button><button class="check" aria-pressed="false"><span class="box"></span>Betaald</button></div></div></div></div>
+        <div class="tk tk-wait"><div class="tk-in"><div class="tk-stub"><small>25 nov</small><b>1</b><small>dag</small></div><div class="tk-body"><div class="grow"><div class="tk-title">Studio Noord</div><div class="tk-meta">Losse factuur · dagprijs</div></div><b class="num">€ 107,00</b><div class="checks"><button class="check" aria-pressed="true"><span class="box"></span>Verstuurd</button><button class="check" aria-pressed="false"><span class="box"></span>Betaald</button></div></div></div></div>
+      </div>
+
+      <div class="section-head"><h3>Betaald</h3></div>
+      <div class="stack">
+        <div class="tk"><div class="tk-in"><div class="tk-stub"><small>okt</small><b>14</b><small>dagen</small></div><div class="tk-body"><div class="grow"><div class="tk-title">Café De Zon</div><div class="tk-meta">Maandfactuur · betaald 6 nov</div></div><b class="num">€ 1.551,00</b><div class="checks"><button class="check" aria-pressed="true"><span class="box"></span>Verstuurd</button><button class="check" aria-pressed="true"><span class="box"></span>Betaald</button></div></div></div></div>
+      </div>
+
+      <div class="section-head"><h3>Werkgevers</h3><button class="linkbtn">+ Nieuwe</button></div>
+      <div class="card list" style="padding:4px 18px">
+        <div class="li"><div class="grow"><div class="t">Café De Zon</div><div class="m">€ 16,50 per uur · maandfactuur</div></div><span class="pill pill-ok">Maand</span></div>
+        <div class="li"><div class="grow"><div class="t">Studio Noord</div><div class="m">€ 107 per dag · losse facturen</div></div><span class="pill">Los</span></div>
+      </div>
+    </section>
+
+    <!-- MUZIEK -->
+    <section data-page="muziek" hidden>
+      <div class="page-head">
+        <div><p class="muted small">Inkomsten, uitgaven, merch en rechten</p><h1>Muziek</h1></div>
+        <button class="btn btn-ink btn-s" data-sheet="streaming">+ Streaming</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi k-in"><span class="label">Binnen dit jaar</span><b>€ 2.140</b></div>
+        <div class="kpi"><span class="label">Uitgegeven</span><b>€ 865</b></div>
+        <div class="kpi k-wait"><span class="label">Aan makers</span><b>€ 184</b></div>
+      </div>
+
+      <div class="section-head"><h3>Nog door te betalen aan makers</h3></div>
+      <div class="card list" style="padding:4px 18px">
+        <div class="li"><span class="avatar" style="background:#6aa84f">J</span><div class="grow"><div class="t">Joris (producer)</div><div class="m">Opgebouwd sinds 1 sep</div></div><div class="amt">€ 121,40</div><button class="check" aria-pressed="false"><span class="box"></span>Betaald</button></div>
+        <div class="li"><span class="avatar" style="background:#a64d79">L</span><div class="grow"><div class="t">Lieke (tekst)</div><div class="m">Opgebouwd sinds 1 sep</div></div><div class="amt">€ 62,80</div><button class="check" aria-pressed="false"><span class="box"></span>Betaald</button></div>
+      </div>
+
+      <div class="section-head"><h3>Nummers en rechten</h3><button class="linkbtn">+ Nummer</button></div>
+      <div class="card" style="padding:4px 18px">
+        <div class="song"><div class="row"><b class="grow">Zomerlicht</b><span class="num small muted">€ 412 dit jaar</span></div><div class="shares"><i style="width:60%;background:var(--green)"></i><i style="width:25%;background:#6aa84f"></i><i style="width:15%;background:#a64d79"></i></div><div class="legend tiny"><span><i style="background:var(--green)"></i>Naduah 60%</span><span><i style="background:#6aa84f"></i>Joris 25%</span><span><i style="background:#a64d79"></i>Lieke 15%</span></div></div>
+        <div class="song"><div class="row"><b class="grow">Kleine uren</b><span class="num small muted">€ 236 dit jaar</span></div><div class="shares"><i style="width:80%;background:var(--green)"></i><i style="width:20%;background:#6aa84f"></i></div><div class="legend tiny"><span><i style="background:var(--green)"></i>Naduah 80%</span><span><i style="background:#6aa84f"></i>Joris 20%</span></div></div>
+        <div class="song"><div class="row"><b class="grow">Golfslag</b><span class="num small muted">€ 98 dit jaar</span></div><div class="shares"><i style="width:100%;background:var(--green)"></i></div><div class="legend tiny"><span><i style="background:var(--green)"></i>Naduah 100%</span></div></div>
+      </div>
+
+      <div class="section-head"><h3>Merch op voorraad</h3><button class="linkbtn">Verkoop of weggeven</button></div>
+      <div class="stock">
+        <div class="card"><b>23</b><span class="small muted">T-shirts</span></div>
+        <div class="card"><b>41</b><span class="small muted">Vinyl</span></div>
+        <div class="card"><b>8</b><span class="small muted">Tasjes</span></div>
+      </div>
+      <div class="list" style="margin-top:10px">
+        <div class="li"><div class="ico">👕</div><div class="grow"><div class="t">T-shirt verkocht</div><div class="m">Na het optreden · aan Marieke</div></div><div class="amt pos">+ € 25,00</div></div>
+        <div class="li"><div class="ico">🎁</div><div class="grow"><div class="t">Vinyl weggegeven</div><div class="m">Aan de geluidsman · alleen voorraad −1</div></div><div class="amt muted">€ 0</div></div>
+      </div>
+    </section>
+
+    <!-- POTJES (belasting + rekeningen) -->
+    <section data-page="potjes" hidden>
+      <div class="page-head"><div><p class="muted small">Belasting, rekeningen en wat je echt kunt uitgeven</p><h1>Potjes</h1></div></div>
+
+      <div class="card card-green stack">
+        <p class="label">Van je ZZP-inkomsten in november is uitgeefbaar</p>
+        <div class="row" style="align-items:flex-end"><span class="big-pct">59%</span><span class="muted" style="padding-bottom:6px">€ 1.420 van € 2.400</span></div>
+        <div class="split" aria-label="Verdeling van ZZP-inkomsten">
+          <div style="flex:59;background:var(--green);color:#000">Uitgeefbaar</div>
+          <div style="flex:21;background:var(--surface);color:var(--ink-2)">Buffer · € 500</div>
+          <div style="flex:20;background:var(--ink-2);color:var(--bg)">Belasting · € 480</div>
+        </div>
+        <p class="tiny muted">De belasting is een schatting. Na je aangifte vul je het echte bedrag in en past alles zich aan.</p>
+      </div>
+
+      <div class="section-head"><h3>Btw om apart te zetten · Q4</h3></div>
+      <div class="card stack">
+        <div class="row"><span class="grow">ZZP-rekening</span><span class="num neg">€ 312,40</span></div>
+        <div class="meter"><i style="width:72%;background:var(--green)"></i></div>
+        <p class="tiny muted">Btw over inkomsten € 401,20 − btw over uitgaven € 88,80</p>
+        <div class="row" style="margin-top:6px"><span class="grow">Muziekrekening</span><span class="num neg">€ 96,15</span></div>
+        <div class="meter"><i style="width:30%;background:var(--green)"></i></div>
+      </div>
+
+      <div class="section-head"><h3>Rekeningen</h3><button class="btn btn-quiet btn-s">Saldo's controleren</button></div>
+      <div class="card" style="padding:0 18px">
+        <div class="acc"><b>Privé</b><span class="num">€ 1.842,10</span><span class="tiny muted">Bank klopt ✓</span></div>
+        <div class="acc"><b>ZZP</b><span class="num">€ 3.106,55</span><span class="tiny muted">Bank klopt ✓</span></div>
+        <div class="acc"><b>Muziek</b><span class="num red">− € 140,00</span><span class="tiny muted">Geleend van Sparen: reis</span></div>
+        <div class="acc"><b>Sparen: buffer &amp; pensioen</b><span class="num">€ 6.500,00</span><span class="tiny muted">+ € 500 per maand</span></div>
+        <div class="acc"><b>Sparen: reis</b><span class="num">€ 760,00</span><span class="tiny muted">Tegoed van Muziek: € 140</span></div>
+      </div>
+      <div class="banner" style="margin-top:12px">Muziek is <b>€ 140</b> schuldig aan Sparen: reis.</div>
+
+      <div class="section-head"><h3>Voor de jaaropgave</h3></div>
+      <div class="card list" style="padding:4px 18px">
+        <div class="li"><div class="grow"><div class="t">Omzet ZZP + muziek</div><div class="m">Excl. btw, 2026 tot nu</div></div><div class="amt">€ 24.310</div></div>
+        <div class="li"><div class="grow"><div class="t">Zakelijke kosten</div><div class="m">Excl. btw</div></div><div class="amt">€ 3.215</div></div>
+        <div class="li"><div class="grow"><div class="t">Winst</div><div class="m">Voor het geval je ondernemer bent</div></div><div class="amt pos">€ 21.095</div></div>
+      </div>
+    </section>
+
+    <!-- OVER -->
+    <section data-page="over" hidden>
+      <div class="about stack-l">
+        <div class="stack">
+          <p class="presents" style="text-align:left"><b>Wierikx-Van Keulen</b> presenteert</p>
+          <h1>Over Utopie</h1>
+          <p style="font-size:1.2rem;color:var(--green-deep)">Verspil geen tijd meer om te zien dat je geld verspilt.</p>
+        </div>
+        <p>Utopie is een <b>Wierikx-Van Keulen productie</b>. Het idee: meer genieten van het leven en minder tijd verspillen aan administratie. Werkdagen, fooien, facturen, btw, muziekrechten en potjes staan bij elkaar, zodat je in één oogopslag ziet hoe het ervoor staat.</p>
+        <p class="muted">Idee en wensen: Naduah. Gebouwd door Thomas.</p>
+        <div class="banner">Dit is een mockup: niets werkt echt en alle bedragen zijn verzonnen.</div>
+        <div><button class="btn btn-quiet" data-exit>Terug naar het beginscherm</button></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ============ SHEETS ============ -->
+<template id="sheet-transactie">
+  <div class="sheet-head"><h2>Transactie</h2><button class="iconbtn" data-close aria-label="Sluiten">✕</button></div>
+  <div class="stack-l">
+    <div class="seg" role="group"><button aria-pressed="true">Uitgave</button><button>Inkomst</button><button>Overboeking</button></div>
+    <div class="grid-2">
+      <div class="field"><label>Bedrag</label><input class="input" value="€ 36,30"></div>
+      <div class="field"><label>Betaaldatum</label><input class="input" value="23-11-2026"></div>
+    </div>
+    <div class="field"><span class="label">Rekening</span><div class="chips"><button class="chip" aria-pressed="false">Privé</button><button class="chip" aria-pressed="false">ZZP</button><button class="chip" aria-pressed="true">Muziek</button></div></div>
+    <div class="grid-2">
+      <div class="field"><label>Categorie</label><select class="select"><option>Apparatuur</option></select></div>
+      <div class="field"><label>Subcategorie</label><select class="select"><option>Kabels</option></select></div>
+    </div>
+    <div class="field"><label>Project (optioneel)</label><select class="select"><option>Album 2027</option></select></div>
+    <div class="field"><span class="label">Btw (bedrag is inclusief)</span><div class="chips"><button class="chip" aria-pressed="false">0%</button><button class="chip" aria-pressed="false">9%</button><button class="chip" aria-pressed="true">21%</button></div></div>
+    <div class="field"><span class="label">Betaald met</span><div class="chips"><button class="chip" aria-pressed="true">Digitale euro's</button><button class="chip" aria-pressed="false">Contant</button><button class="chip" aria-pressed="false">Vreemde valuta</button></div></div>
+    <label class="switch"><input type="checkbox"><span class="track"></span><span><b>Spreiden over dagen</b><span class="small muted">Zoals huur over de maand of een hostel over je nachten</span></span></label>
+    <label class="switch"><input type="checkbox"><span class="track"></span><span><b>Koppelen aan ander bedrag</b><span class="small muted">Bijvoorbeeld een Tikkie terug voor een etentje</span></span></label>
+  </div>
+  <div class="sheet-foot"><button class="btn btn-quiet" data-close>Annuleren</button><button class="btn btn-ink" data-close>Opslaan</button></div>
+</template>
+
+<template id="sheet-werkdag">
+  <div class="sheet-head"><h2>Werkdag</h2><button class="iconbtn" data-close aria-label="Sluiten">✕</button></div>
+  <div class="stack-l">
+    <div class="field"><span class="label">Werkgever</span><div class="chips"><button class="chip" aria-pressed="true">Café De Zon</button><button class="chip" aria-pressed="false">Studio Noord</button><button class="chip" aria-pressed="false">+ Nieuwe</button></div></div>
+    <div class="grid-2">
+      <div class="field"><label>Datum</label><input class="input" value="vr 27 nov"></div>
+      <div class="field"><label>Uren</label><input class="input" value="8"></div>
+    </div>
+    <div class="grid-2">
+      <div class="field"><label>Contante fooi</label><input class="input" value="€ 14,00"></div>
+      <div class="field"><label>Digitale fooi</label><input class="input" value="€ 6,50"></div>
+    </div>
+    <div class="total"><span class="muted">Verdiend vandaag<br><span class="tiny">8 × € 16,50 + fooi</span></span><b class="num">€ 152,50</b></div>
+    <p class="small muted">Contante fooi telt meteen mee. Het loon en de digitale fooi blijven doorzichtig in het overzicht tot ze uitbetaald zijn.</p>
+  </div>
+  <div class="sheet-foot"><button class="btn btn-quiet" data-close>Annuleren</button><button class="btn btn-ink" data-close>Opslaan</button></div>
+</template>
+
+<template id="sheet-import">
+  <div class="sheet-head"><h2>Bank-CSV</h2><button class="iconbtn" data-close aria-label="Sluiten">✕</button></div>
+  <div class="stack-l">
+    <div class="steps"><span class="on">1 · Bestand</span><span class="on">2 · Kolommen</span><span>3 · Controleren</span></div>
+    <div class="row card" style="padding:12px 14px"><span style="font-size:1.4rem">📄</span><div class="grow"><b>NL12INGB_nov-2026.csv</b><p class="tiny muted">63 regels · herkend als ING</p></div><button class="linkbtn">Ander bestand</button></div>
+    <div class="stack">
+      <div class="row"><h3 class="grow">Welke kolom is wat?</h3><span class="pill pill-ok">Voorzet van Utopie</span></div>
+      <div class="map">
+        <div class="map-row guess"><div class="src"><b>Datum</b><span>20261127</span></div><span>→</span><select class="select select-s"><option>Betaaldatum</option></select></div>
+        <div class="map-row guess"><div class="src"><b>Naam / Omschrijving</b><span>ALBERT HEIJN 1430</span></div><span>→</span><select class="select select-s"><option>Omschrijving</option></select></div>
+        <div class="map-row guess"><div class="src"><b>Bedrag (EUR)</b><span>23,41</span></div><span>→</span><select class="select select-s"><option>Bedrag</option></select></div>
+        <div class="map-row guess"><div class="src"><b>Af Bij</b><span>Af</span></div><span>→</span><select class="select select-s"><option>Af of bij</option></select></div>
+        <div class="map-row"><div class="src"><b>Tegenrekening</b><span>NL44RABO0123…</span></div><span>→</span><select class="select select-s"><option>Tegenpartij</option></select></div>
+        <div class="map-row"><div class="src"><b>Mededelingen</b><span>Pasvolgnr: 012 …</span></div><span>→</span><select class="select select-s"><option>Niet gebruiken</option></select></div>
+      </div>
+    </div>
+    <div class="stack">
+      <h3>Zo ziet het eruit</h3>
+      <div style="overflow-x:auto"><table class="preview"><thead><tr><th>Datum</th><th>Omschrijving</th><th>Bedrag</th></tr></thead><tbody><tr><td>27-11</td><td>Albert Heijn 1430</td><td>− € 23,41</td></tr><tr><td>26-11</td><td>Trattoria Nonna</td><td>− € 80,00</td></tr><tr><td>26-11</td><td>Sam via Tikkie</td><td>+ € 25,00</td></tr></tbody></table></div>
+    </div>
+    <label class="switch"><input type="checkbox" checked><span class="track"></span><span><b>Onthoud dit voor ING</b><span class="small muted">De volgende keer staan de kolommen meteen goed</span></span></label>
+    <div class="banner">4 regels staan al in Utopie, bijvoorbeeld een factuur die je als betaald hebt afgevinkt. Die worden gekoppeld en niet dubbel toegevoegd.</div>
+  </div>
+  <div class="sheet-foot"><button class="btn btn-quiet" data-close>Terug</button><button class="btn btn-ink" data-close>Verder controleren</button></div>
+</template>
+
+<template id="sheet-streaming">
+  <div class="sheet-head"><h2>Streaming</h2><button class="iconbtn" data-close aria-label="Sluiten">✕</button></div>
+  <div class="stack-l">
+    <div class="grid-2"><div class="field"><label>Datum</label><input class="input" value="20-11-2026"></div><div class="field"><label>Totaal</label><input class="input" value="€ 86,40"></div></div>
+    <div class="stack">
+      <h3>Per nummer</h3>
+      <div class="row"><span class="grow">Zomerlicht</span><input class="input" style="width:120px" value="€ 51,20"></div>
+      <div class="row"><span class="grow">Kleine uren</span><input class="input" style="width:120px" value="€ 27,10"></div>
+      <div class="row"><span class="grow">Golfslag</span><input class="input" style="width:120px" value="€ 8,10"></div>
+    </div>
+    <div class="total"><span class="muted">Gaat naar Joris en Lieke</span><b class="num">€ 26,90</b></div>
+    <p class="small muted">In je overzicht blijft dit één transactie.</p>
+  </div>
+  <div class="sheet-foot"><button class="btn btn-quiet" data-close>Annuleren</button><button class="btn btn-ink" data-close>Opslaan</button></div>
+</template>
+
+<div id="sheet-root"></div>
+
+<script>
+// Alleen voor de mockup: schermen wisselen en sheets openen. Er wordt niets opgeslagen.
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+function show(view) {
+  $$('[data-page]').forEach(p => p.hidden = p.dataset.page !== view);
+  $$('.tab').forEach(t => t.dataset.view === view ? t.setAttribute('aria-current', 'page') : t.removeAttribute('aria-current'));
+  window.scrollTo(0, 0);
+}
+function enter() { $('#landing').hidden = true; $('#app').hidden = false; show('overzicht'); }
+function exit() { $('#app').hidden = true; $('#landing').hidden = false; window.scrollTo(0, 0); }
+function openSheet(name) {
+  const tpl = document.getElementById('sheet-' + name); if (!tpl) return;
+  const scrim = document.createElement('div'); scrim.className = 'scrim';
+  const sheet = document.createElement('div'); sheet.className = 'sheet' + (name === 'import' ? ' wide' : '');
+  sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true');
+  sheet.appendChild(tpl.content.cloneNode(true)); scrim.appendChild(sheet);
+  scrim.addEventListener('click', e => { if (e.target === scrim || e.target.closest('[data-close]')) scrim.remove(); });
+  $('#sheet-root').appendChild(scrim);
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') $$('.scrim').forEach(s => s.remove()); });
+document.addEventListener('click', e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.matches('[data-enter]')) return enter();
+  if (t.matches('[data-exit]')) return exit();
+  if (t.dataset.view) return show(t.dataset.view);
+  if (t.dataset.sheet) return openSheet(t.dataset.sheet);
+  if (t.matches('.chip, .check')) t.setAttribute('aria-pressed', t.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+  const seg = t.closest('.seg'); if (seg) $$('button', seg).forEach(b => b.setAttribute('aria-pressed', b === t ? 'true' : 'false'));
+});
+</script>
+</body>
+</html>
